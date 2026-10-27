@@ -13,14 +13,14 @@ from .metrics import all_metrics
 
 @dataclass
 class Split:
-    history: pd.DataFrame            # взаимодействия, на которых учатся модели
-    target: pd.DataFrame             # целевой период (validation или test)
-    user_ids: np.ndarray             # внешние id пользователей истории (индекс = позиция)
-    item_ids: np.ndarray             # внешние id объектов истории (индекс = позиция)
-    X: sp.csr_matrix                 # бинарная матрица user x item по истории
-    eval_users: np.ndarray           # индексы оцениваемых пользователей
-    relevant: list                   # список множеств индексов релевантных объектов
-    cutoff_ts: float                 # момент рекомендации (начало целевого периода)
+    history: pd.DataFrame        
+    target: pd.DataFrame            
+    user_ids: np.ndarray            
+    item_ids: np.ndarray            
+    X: sp.csr_matrix                 
+    eval_users: np.ndarray           
+    relevant: list                  
+    cutoff_ts: float                 
     stats: dict = field(default_factory=dict)
 
     @property

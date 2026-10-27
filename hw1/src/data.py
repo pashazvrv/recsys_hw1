@@ -104,12 +104,6 @@ def is_relevant(df: pd.DataFrame, like_rating: int = 8, dislike_rating: int = 4)
 
 def make_subsample(df: pd.DataFrame, n_users: int, seed: int, filter_before_day: int,
                    min_user_items: int = 5, min_item_users: int = 10) -> pd.DataFrame:
-    """Воспроизводимая подвыборка. Фильтры считаются по периоду до filter_before_day
-    (начало validation), чтобы отбор не использовал информацию из будущего:
-    1) пользователи с >= min_user_items объектов до filter_before_day;
-    2) случайно (seed) выбираем n_users из них;
-    3) объекты, которые до filter_before_day смотрели >= min_item_users выбранных пользователей;
-    4) берём все взаимодействия (за весь период) выбранных пользователей с выбранными объектами."""
     early = df[df["day"] < filter_before_day]
     user_cnt = early.groupby("user_id")["item_id"].size()
     eligible = np.sort(user_cnt.index[user_cnt >= min_user_items].to_numpy())
